@@ -65,7 +65,6 @@ public class BeerClientImpl implements BeerClient {
 
     @Override
     public BeerDTO updateBeer(BeerDTO beerDto) {
-
         RestClient restClient = restClientBuilder.build();
 
         restClient.put()
@@ -79,6 +78,11 @@ public class BeerClientImpl implements BeerClient {
 
     @Override
     public void deleteBeer(UUID beerId) {
+        RestClient restClient = restClientBuilder.build();
 
+        restClient.delete()
+                .uri(uriBuilder -> uriBuilder.path(GET_BEER_BY_ID_PATH).build(beerId))
+                .retrieve();
     }
+
 }
